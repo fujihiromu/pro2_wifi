@@ -1,0 +1,5 @@
+version: "Apple Swift version 4.0.2 (swiftlang-900.0.69.2 clang-900.0.38)"
+options: "e67ffc8782da3057f6c514e9fcc35113"
+build_time: [1512320228, 696459000]
+inputs:
+  "/Users/fuji1153/Desktop/ios application/pro2_wifi/pro2_wifiUITests/pro2_wifiUITests.swift": [1512301336, 0]

@@ -15,6 +15,24 @@
 		5E17B5211FD41A9800012CAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B51F1FD41A9800012CAD /* LaunchScreen.storyboard */; };
 		5E17B52C1FD41A9800012CAD /* pro2_wifiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E17B52B1FD41A9800012CAD /* pro2_wifiTests.swift */; };
 		5E17B5371FD41A9800012CAD /* pro2_wifiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E17B5361FD41A9800012CAD /* pro2_wifiUITests.swift */; };
+		5E17B5551FD41B1100012CAD /* music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5441FD41B0F00012CAD /* music2.mp3 */; };
+		5E17B5561FD41B1100012CAD /* alexandoros.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5451FD41B0F00012CAD /* alexandoros.jpg */; };
+		5E17B5571FD41B1100012CAD /* 音楽-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5461FD41B0F00012CAD /* 音楽-32.png */; };
+		5E17B5581FD41B1100012CAD /* 音楽-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5471FD41B0F00012CAD /* 音楽-128.png */; };
+		5E17B5591FD41B1100012CAD /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5481FD41B1000012CAD /* music.mp3 */; };
+		5E17B55A1FD41B1100012CAD /* 音楽-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5491FD41B1000012CAD /* 音楽-60.png */; };
+		5E17B55B1FD41B1100012CAD /* 音楽-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B54A1FD41B1000012CAD /* 音楽-1024.png */; };
+		5E17B55C1FD41B1100012CAD /* backgrounds.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B54B1FD41B1000012CAD /* backgrounds.png */; };
+		5E17B55D1FD41B1100012CAD /* 音楽-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B54C1FD41B1000012CAD /* 音楽-256.png */; };
+		5E17B55E1FD41B1100012CAD /* 音楽-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B54D1FD41B1000012CAD /* 音楽-120.png */; };
+		5E17B55F1FD41B1100012CAD /* sakanaction.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B54E1FD41B1000012CAD /* sakanaction.jpeg */; };
+		5E17B5601FD41B1100012CAD /* 音楽-64.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B54F1FD41B1000012CAD /* 音楽-64.png */; };
+		5E17B5611FD41B1100012CAD /* 音楽-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5501FD41B1100012CAD /* 音楽-80.png */; };
+		5E17B5621FD41B1100012CAD /* 音楽.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5511FD41B1100012CAD /* 音楽.png */; };
+		5E17B5631FD41B1100012CAD /* 音楽-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5521FD41B1100012CAD /* 音楽-40.png */; };
+		5E17B5641FD41B1100012CAD /* 音楽-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E17B5531FD41B1100012CAD /* 音楽-180.png */; };
+		5E17B5651FD41B1100012CAD /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E17B5541FD41B1100012CAD /* Audio.swift */; };
+		5E17B5671FD458BF00012CAD /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E17B5661FD458BE00012CAD /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +67,24 @@
 		5E17B5321FD41A9800012CAD /* pro2_wifiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pro2_wifiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E17B5361FD41A9800012CAD /* pro2_wifiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pro2_wifiUITests.swift; sourceTree = "<group>"; };
 		5E17B5381FD41A9800012CAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E17B5441FD41B0F00012CAD /* music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music2.mp3; sourceTree = "<group>"; };
+		5E17B5451FD41B0F00012CAD /* alexandoros.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alexandoros.jpg; sourceTree = "<group>"; };
+		5E17B5461FD41B0F00012CAD /* 音楽-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-32.png"; sourceTree = "<group>"; };
+		5E17B5471FD41B0F00012CAD /* 音楽-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-128.png"; sourceTree = "<group>"; };
+		5E17B5481FD41B1000012CAD /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		5E17B5491FD41B1000012CAD /* 音楽-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-60.png"; sourceTree = "<group>"; };
+		5E17B54A1FD41B1000012CAD /* 音楽-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-1024.png"; sourceTree = "<group>"; };
+		5E17B54B1FD41B1000012CAD /* backgrounds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgrounds.png; sourceTree = "<group>"; };
+		5E17B54C1FD41B1000012CAD /* 音楽-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-256.png"; sourceTree = "<group>"; };
+		5E17B54D1FD41B1000012CAD /* 音楽-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-120.png"; sourceTree = "<group>"; };
+		5E17B54E1FD41B1000012CAD /* sakanaction.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sakanaction.jpeg; sourceTree = "<group>"; };
+		5E17B54F1FD41B1000012CAD /* 音楽-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-64.png"; sourceTree = "<group>"; };
+		5E17B5501FD41B1100012CAD /* 音楽-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-80.png"; sourceTree = "<group>"; };
+		5E17B5511FD41B1100012CAD /* 音楽.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽.png"; sourceTree = "<group>"; };
+		5E17B5521FD41B1100012CAD /* 音楽-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-40.png"; sourceTree = "<group>"; };
+		5E17B5531FD41B1100012CAD /* 音楽-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音楽-180.png"; sourceTree = "<group>"; };
+		5E17B5541FD41B1100012CAD /* Audio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		5E17B5661FD458BE00012CAD /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +135,24 @@
 		5E17B5121FD41A9800012CAD /* pro2_wifi */ = {
 			isa = PBXGroup;
 			children = (
+				5E17B5661FD458BE00012CAD /* SwiftyJSON.swift */,
+				5E17B5451FD41B0F00012CAD /* alexandoros.jpg */,
+				5E17B5541FD41B1100012CAD /* Audio.swift */,
+				5E17B54B1FD41B1000012CAD /* backgrounds.png */,
+				5E17B5481FD41B1000012CAD /* music.mp3 */,
+				5E17B5441FD41B0F00012CAD /* music2.mp3 */,
+				5E17B54E1FD41B1000012CAD /* sakanaction.jpeg */,
+				5E17B5461FD41B0F00012CAD /* 音楽-32.png */,
+				5E17B5521FD41B1100012CAD /* 音楽-40.png */,
+				5E17B5491FD41B1000012CAD /* 音楽-60.png */,
+				5E17B54F1FD41B1000012CAD /* 音楽-64.png */,
+				5E17B5501FD41B1100012CAD /* 音楽-80.png */,
+				5E17B54D1FD41B1000012CAD /* 音楽-120.png */,
+				5E17B5471FD41B0F00012CAD /* 音楽-128.png */,
+				5E17B5531FD41B1100012CAD /* 音楽-180.png */,
+				5E17B54C1FD41B1000012CAD /* 音楽-256.png */,
+				5E17B54A1FD41B1000012CAD /* 音楽-1024.png */,
+				5E17B5511FD41B1100012CAD /* 音楽.png */,
 				5E17B5131FD41A9800012CAD /* AppDelegate.swift */,
 				5E17B5151FD41A9800012CAD /* ViewController.swift */,
 				5E17B5171FD41A9800012CAD /* Main.storyboard */,
@@ -235,9 +289,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E17B55F1FD41B1100012CAD /* sakanaction.jpeg in Resources */,
+				5E17B5611FD41B1100012CAD /* 音楽-80.png in Resources */,
+				5E17B5621FD41B1100012CAD /* 音楽.png in Resources */,
+				5E17B5591FD41B1100012CAD /* music.mp3 in Resources */,
+				5E17B55C1FD41B1100012CAD /* backgrounds.png in Resources */,
+				5E17B5631FD41B1100012CAD /* 音楽-40.png in Resources */,
+				5E17B5561FD41B1100012CAD /* alexandoros.jpg in Resources */,
 				5E17B5211FD41A9800012CAD /* LaunchScreen.storyboard in Resources */,
+				5E17B5571FD41B1100012CAD /* 音楽-32.png in Resources */,
 				5E17B51E1FD41A9800012CAD /* Assets.xcassets in Resources */,
+				5E17B55A1FD41B1100012CAD /* 音楽-60.png in Resources */,
+				5E17B5601FD41B1100012CAD /* 音楽-64.png in Resources */,
+				5E17B5641FD41B1100012CAD /* 音楽-180.png in Resources */,
+				5E17B55E1FD41B1100012CAD /* 音楽-120.png in Resources */,
+				5E17B55B1FD41B1100012CAD /* 音楽-1024.png in Resources */,
 				5E17B5191FD41A9800012CAD /* Main.storyboard in Resources */,
+				5E17B5551FD41B1100012CAD /* music2.mp3 in Resources */,
+				5E17B5581FD41B1100012CAD /* 音楽-128.png in Resources */,
+				5E17B55D1FD41B1100012CAD /* 音楽-256.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,8 +332,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E17B5651FD41B1100012CAD /* Audio.swift in Sources */,
 				5E17B51C1FD41A9800012CAD /* pro2_wifi.xcdatamodeld in Sources */,
 				5E17B5161FD41A9800012CAD /* ViewController.swift in Sources */,
+				5E17B5671FD458BF00012CAD /* SwiftyJSON.swift in Sources */,
 				5E17B5141FD41A9800012CAD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,8 @@
+version: "Apple Swift version 4.0.2 (swiftlang-900.0.69.2 clang-900.0.38)"
+options: "3b9ef1eb5d6825d96d8d5e9a04246f20"
+build_time: [1512318493, 821044000]
+inputs:
+  "/Users/fuji1153/Desktop/ios application/pro2_wifi/pro2_wifi/Audio.swift": [1511865269, 0]
+  "/Users/fuji1153/Desktop/ios application/pro2_wifi/pro2_wifi/ViewController.swift": [1512318281, 0]
+  "/Users/fuji1153/Desktop/ios application/pro2_wifi/pro2_wifi/SwiftyJSON.swift": [1506342838, 0]
+  "/Users/fuji1153/Desktop/ios application/pro2_wifi/pro2_wifi/AppDelegate.swift": [1512301336, 0]
