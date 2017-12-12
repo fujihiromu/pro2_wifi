@@ -29,9 +29,6 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
     let MIN_GAIN: Float = -96.0
     
     private var isScanning = false
-    var image1: UIImage!
-    var image2: UIImage!
-    var musicNum = true
     private var audio = Audio()
     var isplay = false
     var timer = Timer()
@@ -41,8 +38,6 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
         
         
         super.viewDidLoad()
-        image1 = UIImage(named:"sakanaction.jpeg")
-        image2 = UIImage(named:"alexandoros.jpg")
         EQ00.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
         EQ01.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
         EQ02.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
@@ -51,94 +46,71 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
         SDRSpeed.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
         SDRWetDryMix.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
         SDRVolume.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
-        
-        ///update 処理
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
-            if(self.Wifi_Switch.isOn){
-                let url = NSURL(string: self.ESP8266ServerURL)!
-                let task = URLSession.shared.dataTask(with: url as URL, completionHandler: {data, response, error in
-                    let json = try! JSON(data: data!)
-                    if let time = json["Time"].int {
-                        print(time)
-                    }
-                    
-                })
-                task.resume()
-            }
-            
-        })
+       
+
       
+    }
+    func timerUpdate() {
+        print("update")
+//        var isJson = false
+//        var val_reverb : Float = 0.0
+//        if(Wifi_Switch.isOn){
+//            let url = NSURL(string: self.ESP8266ServerURL)!
+//            let task = URLSession.shared.dataTask(with: url as URL, completionHandler: {data, response, error in
+//                let json = try! JSON(data: data!)
+//                if let time = json["Time"].int {
+//                    print(time)
+//                    isJson = true
+//                    val_reverb = Float(time)
+//                }
+//                
+//            })
+//            task.resume()
+//            if isJson {
+//                audio.sliderReverbChanged(value: val_reverb)
+//                SDRReverb.value = val_reverb
+//            }
+//        }
+    }
+    
+    func timerBegin(){
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) {_ in
+            print("Hello")
+            if(self.Wifi_Switch.isOn){
+                if let url = NSURL(string: self.ESP8266ServerURL){
+                    let task = try! URLSession.shared.dataTask(with: url as URL, completionHandler: {data, response, error in
+                        if( data != nil){
+                            let json = try! JSON(data: data!)
+                            if let time = json["Time"].int {
+                                print(time)
+                                self.audio.sliderReverbChanged(value: Float(time))
+                                self.SDRReverb.value = Float(time)
+                            }
+                        }else{
+                            print("nodata")
+                        }
+                    })
+                    task.resume()
+                  
+                }
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func onUpdate(timer : Timer){
-        
-        if(Wifi_Switch.isOn){
-            let url = NSURL(string: self.ESP8266ServerURL)!
-            let task = URLSession.shared.dataTask(with: url as URL, completionHandler: {data, response, error in
-                let json = try! JSON(data: data!)
-                if let time = json["Time"].int {
-                    print(time)
-                }
-                
-            })
-            task.resume()
-        }
-    }
-    
     func change(){
-        
         tittle.text = audio.music[audio.number]
         musician.text = audio.musician[audio.number]
         img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
-        
-//            var str : String = "0"
-//            if(str == "00" ){
-//                if (!isplay){
-//                    audio.buttonPlayPressed(isPlay: false)
-//                    playButton.setTitle("PAUSE", for: .normal)
-//                    isplay = true
-//                } else {
-//                    audio.buttonPlayPressed(isPlay: true)
-//                    playButton.setTitle("PLAY", for: .normal)
-//                    isplay = false
-//                }
-//            }else if(str == "01"){
-//                audio.musicChanged(isPlay: isplay)
-//                if(musicNum){
-//                    img.image = image2
-//                    tittle.text = "ムーンソング"
-//                    musician.text = "[Alexandros]"
-//                    albumName.text = "- EXIST! -"
-//                    musicNum = !musicNum
-//                }else{
-//                    img.image = image1
-//                    tittle.text = "ミュージック"
-//                    musician.text = "サカナクション"
-//                    albumName.text = "- sakanaction -"
-//                    musicNum = !musicNum
-//                }
-//            }
-
+        albumName.text = audio.album[audio.number]
     }
-
     
     @IBAction func scanBtnTapp(sender: UISwitch) {
         if sender.isOn{
-         
-            let url = NSURL(string: self.ESP8266ServerURL)!
-            let task = URLSession.shared.dataTask(with: url as URL, completionHandler: {data, response, error in
-                let json = try! JSON(data: data!)
-                if let time = json["Time"].int {
-                    print(time)
-                }
-                
-            })
-            task.resume()
-            
+            timerBegin()
         } else {
             
        
@@ -158,21 +130,11 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
     }
     @IBAction func musicchange(sender: UIButton) {
         audio.musicChanged(isPlay: isplay)
-        
-        if(musicNum){
-            img.image = image2
-            tittle.text = "ムーンソング"
-            musician.text = "[Alexandros]"
-            albumName.text = "- EXIST! -"
-            musicNum = !musicNum
-        }else{
-            img.image = image1
-            tittle.text = "ミュージック"
-            musician.text = "サカナクション"
-            albumName.text = "- sakanaction -"
-            musicNum = !musicNum
-        }
-        
+        tittle.text = audio.music[audio.number]
+        musician.text = audio.musician[audio.number]
+        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
+        albumName.text = audio.album[audio.number]
+
     }
     
     @IBAction func ReverbChanged(sender: UISlider) {
@@ -229,7 +191,6 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
         present(picker, animated: true, completion: nil)
         
     }
-    
     // メディアアイテムピッカーでアイテムを選択完了したときに呼び出される
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         
@@ -251,6 +212,10 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
         
         audio.setPlaylist(mediaItem: mediaItemCollection)
 //        // 先頭のMPMediaItemを取得し、そのassetURLからプレイヤーを作成する
+        albumName.text = audio.album[audio.number]
+        tittle.text = audio.music[audio.number]
+        musician.text = audio.musician[audio.number]
+        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
     }
     
     //選択がキャンセルされた場合に呼ばれる

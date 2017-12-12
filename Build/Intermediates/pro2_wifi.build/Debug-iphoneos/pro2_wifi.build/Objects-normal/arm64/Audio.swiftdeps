@@ -8,9 +8,11 @@ provides-member:
 provides-dynamic-lookup:
 depends-top-level:
 - !private "+="
+- !private "-"
 - !private "..."
 - !private "..<"
 - !private "<"
+- !private ">"
 - "AVAudioEngine"
 - "AVAudioFile"
 - "AVAudioPlayerNode"

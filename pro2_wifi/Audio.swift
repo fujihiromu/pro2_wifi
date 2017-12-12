@@ -1,14 +1,8 @@
-//
-//  audio.swift
-//  pro2_ble_audio_effects
-//
-//  Created by Fuji Hiromu on 2017/10/28.
-//  Copyright © 2017 藤　大夢. All rights reserved.
-//
-
+                                                                                                                                                                                                                                                                                                                  
 import UIKit
 import AVFoundation
 import MediaPlayer
+                                                                                                                                                                                                                                                                                                                  
 open class Audio: NSObject,MPMediaPickerControllerDelegate {
     let MAX_GAIN: Float = 24.0
     let MIN_GAIN: Float = -96.0
@@ -17,7 +11,6 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
     var audioFilePlayer: AVAudioPlayerNode!
     var audioReverb: AVAudioUnitReverb!
     var audioDelay: AVAudioUnitDelay!
-//    var audioFile: AVAudioFile!
     var audioSpeed: AVAudioUnitTimePitch!
     var audioUnitEQ = AVAudioUnitEQ(numberOfBands: 5)
     
@@ -30,8 +23,7 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
     var album = [String]()
     var artwork = [MPMediaItemArtwork]()
     
-    override init(){
-    
+    override init(){ 
         // AudioEngineの生成
         audioEngine = AVAudioEngine()
         
@@ -67,7 +59,7 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
             audioUnitEQ.bands[i].gain = 0
             audioUnitEQ.bands[i].bypass = false
         }
-//        audioUnitEQ.bypass = true
+
         
         // AVPlayerNodeとReverbNodeとDelayNodeをAVAudioEngineへ追加
         audioEngine.attach(audioFilePlayer)
@@ -82,9 +74,10 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
             audioEngine.connect(audioDelay, to: audioSpeed, format: audioFile[i].processingFormat)
             audioEngine.connect(audioSpeed, to: audioUnitEQ, format: audioFile[i].processingFormat)
             audioEngine.connect(audioUnitEQ, to: audioEngine.mainMixerNode, format: audioFile[i].processingFormat)
+            // AVAudioEngineの開始
+            try! audioEngine.start()
         }
-        // AVAudioEngineの開始
-        try! audioEngine.start()
+        
         print(audioEngine.isRunning)
         
     }
@@ -155,18 +148,20 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
     
     
     public func buttonPlayPressed(isPlay : Bool) {
-        if (isPlay) {
-            audioFilePlayer.pause()
-            
-        } else {
-            audioFilePlayer.scheduleFile(audioFile[number], at: nil, completionHandler: nil)
-            audioFilePlayer.play()
-            
+        if(audioFile.count > 0){
+            if (isPlay) {
+                audioFilePlayer.pause()
+                
+            } else {
+                audioFilePlayer.scheduleFile(audioFile[number], at: nil, completionHandler: nil)
+                audioFilePlayer.play()
+                
+            }
         }
     }
     
     public func musicChanged(isPlay : Bool){
-        if number < audioFile.count {
+        if number < audioFile.count - 1 {
             number += 1
         }else{
             number = 0
