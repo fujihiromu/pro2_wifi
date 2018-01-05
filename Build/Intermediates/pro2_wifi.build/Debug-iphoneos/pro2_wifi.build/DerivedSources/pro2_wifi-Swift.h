@@ -176,6 +176,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import ObjectiveC;
 @import MediaPlayer;
 @import Foundation;
+@import CoreGraphics;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -210,53 +211,31 @@ SWIFT_CLASS("_TtC9pro2_wifi5Audio")
 
 
 
-@class UIImageView;
-@class UILabel;
 @class UISwitch;
+@class UITableView;
 @class UIButton;
-@class UISlider;
 @class MPMediaPickerController;
 @class MPMediaItemCollection;
+@class UITableViewCell;
 @class NSBundle;
 @class NSCoder;
 
 SWIFT_CLASS("_TtC9pro2_wifi14ViewController")
-@interface ViewController : UIViewController <MPMediaPickerControllerDelegate>
-@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified img;
-@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified tittle;
-@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified musician;
-@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified albumName;
+@interface ViewController : UIViewController <MPMediaPickerControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) IBOutlet UISwitch * _Null_unspecified Wifi_Switch;
+@property (nonatomic, strong) IBOutlet UITableView * _Null_unspecified musictable;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified playButton;
-@property (nonatomic, weak) IBOutlet UISlider * _Null_unspecified SDRReverb;
-@property (nonatomic, weak) IBOutlet UISlider * _Null_unspecified SDRWetDryMix;
-@property (nonatomic, weak) IBOutlet UISlider * _Null_unspecified SDRSpeed;
-@property (nonatomic, weak) IBOutlet UISlider * _Null_unspecified SDRPitch;
-@property (nonatomic, weak) IBOutlet UISlider * _Null_unspecified SDRVolume;
-@property (nonatomic, weak) IBOutlet UISlider * _Null_unspecified EQ00;
-@property (nonatomic, weak) IBOutlet UISlider * _Null_unspecified EQ01;
-@property (nonatomic, weak) IBOutlet UISlider * _Null_unspecified EQ02;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
 - (IBAction)scanBtnTappWithSender:(UISwitch * _Nonnull)sender;
 - (IBAction)PlayPressedWithSender:(UIButton * _Nonnull)sender;
 - (IBAction)musicchangeWithSender:(UIButton * _Nonnull)sender;
-- (IBAction)ReverbChangedWithSender:(UISlider * _Nonnull)sender;
-- (IBAction)WetDryMixWithSender:(UISlider * _Nonnull)sender;
-- (IBAction)SpeedWithSender:(UISlider * _Nonnull)sender;
-- (IBAction)PitchWithSender:(UISlider * _Nonnull)sender;
-- (IBAction)Gain_00WithSender:(UISlider * _Nonnull)sender;
-- (IBAction)Gain_01WithSender:(UISlider * _Nonnull)sender;
-- (IBAction)Gain_02WithSender:(UISlider * _Nonnull)sender;
-- (IBAction)Gain_03WithSender:(UISlider * _Nonnull)sender;
-- (IBAction)Gain_04WithSender:(UISlider * _Nonnull)sender;
-- (IBAction)VolumeChange:(id _Nonnull)sender;
-- (IBAction)EQChange00:(id _Nonnull)sender;
-- (IBAction)EQChange01:(id _Nonnull)sender;
-- (IBAction)EQChange02:(id _Nonnull)sender;
 - (IBAction)choicePickWithSender:(id _Nonnull)sender;
 - (void)mediaPicker:(MPMediaPickerController * _Nonnull)mediaPicker didPickMediaItems:(MPMediaItemCollection * _Nonnull)mediaItemCollection;
 - (void)mediaPickerDidCancel:(MPMediaPickerController * _Nonnull)mediaPicker;
+- (NSInteger)tableView:(UITableView * _Nonnull)table numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)table cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (CGFloat)tableView:(UITableView * _Nonnull)table heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end

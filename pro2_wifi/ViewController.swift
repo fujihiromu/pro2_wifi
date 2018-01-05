@@ -2,26 +2,14 @@ import UIKit
 import Foundation
 import MediaPlayer
 
-class ViewController: UIViewController , MPMediaPickerControllerDelegate{
-    
-    @IBOutlet weak var img: UIImageView!
-    @IBOutlet weak var tittle: UILabel!
-    @IBOutlet weak var musician: UILabel!
-    @IBOutlet weak var albumName: UILabel!
+class ViewController: UIViewController , MPMediaPickerControllerDelegate,
+UITableViewDataSource, UITableViewDelegate{
+
     @IBOutlet weak var Wifi_Switch: UISwitch!
+    @IBOutlet var musictable:UITableView!
     
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var SDRReverb: UISlider!
 
-    @IBOutlet weak var SDRWetDryMix: UISlider!
-    @IBOutlet weak var SDRSpeed: UISlider!
-    @IBOutlet weak var SDRPitch: UISlider!
-    @IBOutlet weak var SDRVolume: UISlider!
-    
-    @IBOutlet weak var EQ00: UISlider!
-    @IBOutlet weak var EQ01: UISlider!
-    @IBOutlet weak var EQ02: UISlider!
-    
     private let ESP8266ServerURL = "http://192.168.0.1"
     
     
@@ -34,20 +22,17 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
     var timer = Timer()
     var audioFile: AVAudioFile!
     
+    // section毎の画像配列
+    let imgArray: NSArray = [
+        "img0"]
+    
+    let label2Array: NSArray = [
+        "2013/8/23/16:04"]
+    
     override func viewDidLoad() {
         
         
         super.viewDidLoad()
-        EQ00.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
-        EQ01.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
-        EQ02.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
-        SDRReverb.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
-        SDRPitch.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
-        SDRSpeed.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
-        SDRWetDryMix.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
-        SDRVolume.transform = CGAffineTransform(rotationAngle: CGFloat((-90.0 * M_PI) / 180.0))
-       
-
       
     }
     func timerUpdate() {
@@ -84,7 +69,6 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
                             if let time = json["Time"].int {
                                 print(time)
                                 self.audio.sliderReverbChanged(value: Float(time))
-                                self.SDRReverb.value = Float(time)
                             }
                         }else{
                             print("nodata")
@@ -102,10 +86,10 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
     }
     
     func change(){
-        tittle.text = audio.music[audio.number]
-        musician.text = audio.musician[audio.number]
-        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
-        albumName.text = audio.album[audio.number]
+//        tittle.text = audio.music[audio.number]
+//        musician.text = audio.musician[audio.number]
+//        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
+//        albumName.text = audio.album[audio.number]
     }
     
     @IBAction func scanBtnTapp(sender: UISwitch) {
@@ -130,56 +114,13 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
     }
     @IBAction func musicchange(sender: UIButton) {
         audio.musicChanged(isPlay: isplay)
-        tittle.text = audio.music[audio.number]
-        musician.text = audio.musician[audio.number]
-        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
-        albumName.text = audio.album[audio.number]
+//        tittle.text = audio.music[audio.number]
+//        musician.text = audio.musician[audio.number]
+//        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
+//        albumName.text = audio.album[audio.number]
 
     }
-    
-    @IBAction func ReverbChanged(sender: UISlider) {
-        audio.sliderReverbChanged(value: SDRReverb.value)
-    }
-    
-    @IBAction func WetDryMix(sender: UISlider) {
-        audio.sliderWetDryMix(value: SDRWetDryMix.value)
-    }
-    @IBAction func Speed(sender: UISlider) {
-        audio.sliderSpeed(value: SDRSpeed.value)
-    }
-    @IBAction func Pitch(sender: UISlider) {
-        audio.sliderPitch(value: SDRPitch.value)
-    }
-    
-    @IBAction func Gain_00(sender: UISlider) {
-        audio.sliderGain(value: sender.value, num: 0)
-    }
-    @IBAction func Gain_01(sender: UISlider) {
-        audio.sliderGain(value: sender.value, num: 1)
-    }
-    @IBAction func Gain_02(sender: UISlider) {
-        audio.sliderGain(value: sender.value, num: 2)
-    }
-    @IBAction func Gain_03(sender: UISlider) {
-        audio.sliderGain(value: sender.value, num: 3)
-    }
-    @IBAction func Gain_04(sender: UISlider) {
-        audio.sliderGain(value: sender.value, num: 4)
-    }
-    @IBAction func VolumeChange(_ sender: Any) {
-        audio.sliderVolumeChange(value : SDRVolume.value)
-    }
-    @IBAction func EQChange00(_ sender: Any) {
-        audio.sliderEq00(value: EQ00.value)
-    }
-    @IBAction func EQChange01(_ sender: Any) {
-        audio.sliderEq01(value: EQ01.value)
-    }
-    @IBAction func EQChange02(_ sender: Any) {
-        audio.sliderEq02(value: EQ02.value)
-    }
-    
-    
+
     @IBAction func choicePick(sender: AnyObject) {
         // MPMediaPickerControllerのインスタンスを作成
         let picker = MPMediaPickerController()
@@ -212,10 +153,10 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
         
         audio.setPlaylist(mediaItem: mediaItemCollection)
 //        // 先頭のMPMediaItemを取得し、そのassetURLからプレイヤーを作成する
-        albumName.text = audio.album[audio.number]
-        tittle.text = audio.music[audio.number]
-        musician.text = audio.musician[audio.number]
-        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
+//        albumName.text = audio.album[audio.number]
+//        tittle.text = audio.music[audio.number]
+//        musician.text = audio.musician[audio.number]
+//        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
     }
     
     //選択がキャンセルされた場合に呼ばれる
@@ -223,7 +164,42 @@ class ViewController: UIViewController , MPMediaPickerControllerDelegate{
         // ピッカーを閉じ、破棄する
         dismiss(animated: true, completion: nil)
     }
-    
+//
+    //Table Viewのセルの数を指定
+    func tableView(_ table: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        return imgArray.count
+    }
+
+    //各セルの要素を設定する
+    func tableView(_ table: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        // tableCell の ID で UITableViewCell のインスタンスを生成
+        let cell = musictable.dequeueReusableCell(withIdentifier: "musicCell",
+                                             for: indexPath)
+
+        let img = UIImage(named: imgArray[indexPath.row] as! String)
+
+        // Tag番号 1 で UIImageView インスタンスの生成
+        let imageView = cell.viewWithTag(1) as! UIImageView
+        imageView.image = img
+
+        // Tag番号 ２ で UILabel インスタンスの生成
+        let label1 = cell.viewWithTag(2) as! UILabel
+        label1.text = "No." + String(indexPath.row + 1)
+
+        // Tag番号 ３ で UILabel インスタンスの生成
+        let label2 = cell.viewWithTag(3) as! UILabel
+        label2.text = String(describing: label2Array[indexPath.row])
+
+        return cell
+    }
+    // Cell の高さを１２０にする
+    func tableView(_ table: UITableView,heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120.0
+    }
+
 }
 
 
