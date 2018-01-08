@@ -22,19 +22,23 @@ UITableViewDataSource, UITableViewDelegate{
     var timer = Timer()
     var audioFile: AVAudioFile!
     
-    // section毎の画像配列
-    let imgArray: NSArray = [
-        "img0"]
-    
-    let label2Array: NSArray = [
-        "2013/8/23/16:04"]
+//    // section毎の画像配列
+//    let imgArray: NSArray = [
+//        "img0"]
+//
+//    let label2Array: NSArray = [
+//        "2013/8/23/16:04"]
     
     override func viewDidLoad() {
-        
+ 
         
         super.viewDidLoad()
-      
+    
     }
+    
+    
+
+    
     func timerUpdate() {
         print("update")
 //        var isJson = false
@@ -91,6 +95,8 @@ UITableViewDataSource, UITableViewDelegate{
 //        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
 //        albumName.text = audio.album[audio.number]
     }
+    
+ 
     
     @IBAction func scanBtnTapp(sender: UISwitch) {
         if sender.isOn{
@@ -157,6 +163,9 @@ UITableViewDataSource, UITableViewDelegate{
 //        tittle.text = audio.music[audio.number]
 //        musician.text = audio.musician[audio.number]
 //        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
+        
+        musictable.reloadData()
+      
     }
     
     //選択がキャンセルされた場合に呼ばれる
@@ -168,7 +177,7 @@ UITableViewDataSource, UITableViewDelegate{
     //Table Viewのセルの数を指定
     func tableView(_ table: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return imgArray.count
+        return audio.audioFile.count
     }
 
     //各セルの要素を設定する
@@ -179,19 +188,20 @@ UITableViewDataSource, UITableViewDelegate{
         let cell = musictable.dequeueReusableCell(withIdentifier: "musicCell",
                                              for: indexPath)
 
-        let img = UIImage(named: imgArray[indexPath.row] as! String)
+        
+//        let img = UIImage(named: imgArray[indexPath.row] as! String)
 
         // Tag番号 1 で UIImageView インスタンスの生成
         let imageView = cell.viewWithTag(1) as! UIImageView
-        imageView.image = img
+        imageView.image = audio.artwork[indexPath.row].image(at: audio.artwork[indexPath.row].bounds.size)
 
         // Tag番号 ２ で UILabel インスタンスの生成
         let label1 = cell.viewWithTag(2) as! UILabel
-        label1.text = "No." + String(indexPath.row + 1)
+        label1.text = audio.music[indexPath.row]
 
         // Tag番号 ３ で UILabel インスタンスの生成
         let label2 = cell.viewWithTag(3) as! UILabel
-        label2.text = String(describing: label2Array[indexPath.row])
+        label2.text = audio.musician[indexPath.row]
 
         return cell
     }
