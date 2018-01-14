@@ -211,6 +211,8 @@ SWIFT_CLASS("_TtC9pro2_wifi5Audio")
 
 
 
+@class UIImageView;
+@class UILabel;
 @class UISwitch;
 @class UITableView;
 @class UIButton;
@@ -222,6 +224,10 @@ SWIFT_CLASS("_TtC9pro2_wifi5Audio")
 
 SWIFT_CLASS("_TtC9pro2_wifi14ViewController")
 @interface ViewController : UIViewController <MPMediaPickerControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified playImage;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified playMusic;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified playArtist;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified playAlbum;
 @property (nonatomic, weak) IBOutlet UISwitch * _Null_unspecified Wifi_Switch;
 @property (nonatomic, strong) IBOutlet UITableView * _Null_unspecified musictable;
 @property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified playButton;

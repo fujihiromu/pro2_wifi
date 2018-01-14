@@ -169,7 +169,6 @@ depends-member:
 - ["9pro2_wifi5AudioC", "mediaPickerDidCancel"]
 - ["9pro2_wifi5AudioC", "music"]
 - ["9pro2_wifi5AudioC", "musicChanged"]
-- ["9pro2_wifi5AudioC", "musicCount"]
 - ["9pro2_wifi5AudioC", "musician"]
 - ["9pro2_wifi5AudioC", "number"]
 - !private ["9pro2_wifi5AudioC", "print"]
@@ -683,7 +682,6 @@ depends-member:
 - ["So8NSObjectC", "mediaPickerDidCancel"]
 - ["So8NSObjectC", "music"]
 - ["So8NSObjectC", "musicChanged"]
-- ["So8NSObjectC", "musicCount"]
 - ["So8NSObjectC", "musician"]
 - ["So8NSObjectC", "number"]
 - !private ["So8NSObjectC", "pause"]
@@ -1118,4 +1116,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SwiftOnoneSupport.swiftmodule"
-interface-hash: "3a61f5bf1f76b0585dd182db1770d53f"
+interface-hash: "cda03539fd56f3af916536d66988e700"

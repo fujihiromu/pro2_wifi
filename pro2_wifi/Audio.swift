@@ -14,8 +14,6 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
     var audioSpeed: AVAudioUnitTimePitch!
     var audioUnitEQ = AVAudioUnitEQ(numberOfBands: 5)
     
-    var musicCount = 1
-    
     var audioFile = [AVAudioFile!]()
     var number = 0
     var musician = [String]()
@@ -166,14 +164,14 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
         }else{
             number = 0
         }
-        
-        audioFilePlayer.stop()
-        audioFilePlayer.scheduleFile(audioFile[number], at: nil, completionHandler: nil)
-        
-        if(isPlay){
-            audioFilePlayer.play()
+        if(audioFile.count > 0){
+            audioFilePlayer.stop()
+            audioFilePlayer.scheduleFile(audioFile[number], at: nil, completionHandler: nil)
+            
+            if(isPlay){
+                audioFilePlayer.play()
+            }
         }
-        
     }
     
     public func sliderPitch(value : Float){
@@ -191,6 +189,7 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
     
     public func sliderEq00(value : Float){
         audioUnitEQ.bands[0].gain = value;
+        audioUnitEQ.bands[0].
     }
     public func sliderEq01(value : Float){
         audioUnitEQ.bands[1].gain = value;
