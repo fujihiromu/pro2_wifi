@@ -12,7 +12,8 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
     var audioReverb: AVAudioUnitReverb!
     var audioDelay: AVAudioUnitDelay!
     var audioSpeed: AVAudioUnitTimePitch!
-    var audioUnitEQ = AVAudioUnitEQ(numberOfBands: 5)
+    var audioUnitEQ = AVAudioUnitEQ(numberOfBands: 9)
+    var audioFilter = AVAudioUnitEQ(numberOfBands: 1)
     
     var audioFile = [AVAudioFile!]()
     var number = 0
@@ -49,15 +50,27 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
         
         //Eqの生成
        
-        let FREQUENCY: [Float] = [400,  2500, 16000]
-        for i in 0...2 {
+        let FREQUENCY: [Float] = [32,64,90,500, 1000, 2500, 4000,8000,16000]
+        
+        for i in 0...8 {
             audioUnitEQ.bands[i].filterType = .parametric
+            
             audioUnitEQ.bands[i].frequency = FREQUENCY[i]
-            audioUnitEQ.bands[i].bandwidth = 0.5 // half an octave
+            if(i < 2){
+                audioUnitEQ.bands[i].bandwidth = 0.1// half an octave
+            }else{
+                audioUnitEQ.bands[i].bandwidth = 0.2// half an octave
+            }
             audioUnitEQ.bands[i].gain = 0
             audioUnitEQ.bands[i].bypass = false
         }
-
+        
+        audioFilter.bands[0].filterType = .parametric
+        audioFilter.bands[0].frequency = 400
+        audioFilter.bands[0].bandwidth = 0.5// half an octave
+        audioFilter.bands[0].gain = 0
+        audioFilter.bands[0].bypass = false
+        
         
         // AVPlayerNodeとReverbNodeとDelayNodeをAVAudioEngineへ追加
         audioEngine.attach(audioFilePlayer)
@@ -65,13 +78,17 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
         audioEngine.attach(audioDelay)
         audioEngine.attach(audioSpeed)
         audioEngine.attach(audioUnitEQ)
+        audioEngine.attach(audioFilter)
         // AVPlayerNodeとReverbNodeとDelayNodeをAVAudioEngineへ接続
         for i in 0..<audioFile.count {
+            // AVPlayerNodeとReverbNodeとDelayNodeをAVAudioEngineへ接続
             audioEngine.connect(audioFilePlayer, to: audioReverb, format: audioFile[i].processingFormat)
             audioEngine.connect(audioReverb, to: audioDelay, format: audioFile[i].processingFormat)
             audioEngine.connect(audioDelay, to: audioSpeed, format: audioFile[i].processingFormat)
             audioEngine.connect(audioSpeed, to: audioUnitEQ, format: audioFile[i].processingFormat)
-            audioEngine.connect(audioUnitEQ, to: audioEngine.mainMixerNode, format: audioFile[i].processingFormat)
+            audioEngine.connect(audioUnitEQ, to: audioFilter, format: audioFile[i].processingFormat)
+            audioEngine.connect(audioFilter, to: audioEngine.mainMixerNode, format: audioFile[i].processingFormat)
+            
             // AVAudioEngineの開始
             try! audioEngine.start()
         }
@@ -80,9 +97,15 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
         
     }
 
+
     
     public func setPlaylist(mediaItem : MPMediaItemCollection){
         audioFile.removeAll()
+        musician.removeAll()
+        album.removeAll()
+        music.removeAll()
+        artwork.removeAll()
+        
         audioEngine.stop()
         for i in 0 ..< mediaItem.items.count  {
             do{
@@ -103,7 +126,7 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
                 
             } catch {
                 // エラー発生してプレイヤー作成失敗
-                
+                print("error")
                 return
             }
  
@@ -158,11 +181,38 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
         }
     }
     
-    public func musicChanged(isPlay : Bool){
+    public func musicNext(isPlay : Bool){
         if number < audioFile.count - 1 {
             number += 1
         }else{
             number = 0
+        }
+        if(audioFile.count > 0){
+            audioFilePlayer.stop()
+            audioFilePlayer.scheduleFile(audioFile[number], at: nil, completionHandler: nil)
+            
+            if(isPlay){
+                audioFilePlayer.play()
+            }
+        }
+    }
+    public func musicSelect(isPlay : Bool,num : Int){
+        number = num
+        if(audioFile.count > 0){
+            audioFilePlayer.stop()
+            audioFilePlayer.scheduleFile(audioFile[number], at: nil, completionHandler: nil)
+            
+            if(isPlay){
+                audioFilePlayer.play()
+            }
+        }
+    }
+    
+    public func musicBack(isPlay : Bool){
+        if number > 0{
+            number -= 1
+        }else{
+            number = audioFile.count - 1
         }
         if(audioFile.count > 0){
             audioFilePlayer.stop()
@@ -178,23 +228,32 @@ open class Audio: NSObject,MPMediaPickerControllerDelegate {
         audioSpeed.pitch = value
     }
     
-    public func sliderGain(value : Float,num : Int){
-        let band = self.audioUnitEQ.bands[num]
-        band.gain = value
-    }
-    
+
     public func sliderVolumeChange(value : Float){
          audioFilePlayer.volume = value
     }
     
     public func sliderEq00(value : Float){
-        audioUnitEQ.bands[0].gain = value;
-        audioUnitEQ.bands[0].
+        
+        audioUnitEQ.bands[0].gain = value
+        audioUnitEQ.bands[1].gain = value
+        //        audioUnitEQ.bands[2].gain = value;
     }
     public func sliderEq01(value : Float){
-        audioUnitEQ.bands[1].gain = value;
+        audioUnitEQ.bands[3].gain = value
+        audioUnitEQ.bands[4].gain = value
+        audioUnitEQ.bands[5].gain = value
+        print("!!!!")
+        print(value)
     }
     public func sliderEq02(value : Float){
-        audioUnitEQ.bands[2].gain = value;
+        audioUnitEQ.bands[6].gain = value
+        audioUnitEQ.bands[7].gain = value
+        audioUnitEQ.bands[8].gain = value
     }
+    public func sliderFilter(value : Float){
+        audioFilter.bands[0].gain = value
+    }
+    
 }
+                                                                                                                                                                                                                                                                                                                  

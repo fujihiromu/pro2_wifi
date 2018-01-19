@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>Y4DYDEDFTT.fuji.pro2-wifi</string>
+	<string>Y4DYDEDFTT.fuji.DigiLog</string>
 	<key>com.apple.developer.team-identifier</key>
 	<string>Y4DYDEDFTT</string>
 	<key>get-task-allow</key>
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>Y4DYDEDFTT.fuji.pro2-wifi</string>
+		<string>Y4DYDEDFTT.fuji.DigiLog</string>
 	</array>
 </dict>
 </plist>

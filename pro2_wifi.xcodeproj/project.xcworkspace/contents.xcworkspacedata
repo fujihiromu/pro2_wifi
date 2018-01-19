@@ -2,6 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:pro2_wifi.xcodeproj">
+      location = "group:/Users/fuji1153/Desktop/iOS/pro2_wifi/pro2_wifi/ScondView.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/fuji1153/Desktop/iOS/pro2_wifi/pro2_wifi/logo-20.png">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/fuji1153/Desktop/iOS/pro2_wifi/pro2_wifi/logo-40.png">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

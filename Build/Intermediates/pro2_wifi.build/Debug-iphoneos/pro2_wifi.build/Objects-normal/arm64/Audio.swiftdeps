@@ -9,6 +9,7 @@ provides-dynamic-lookup:
 depends-top-level:
 - !private "+="
 - !private "-"
+- !private "-="
 - !private "..."
 - !private "..<"
 - !private "<"
@@ -32,6 +33,7 @@ depends-top-level:
 - "MPMediaPickerControllerDelegate"
 - "NSObject"
 - "String"
+- !private "StringLiteralType"
 - !private "TimeInterval"
 - !private "print"
 depends-member:
@@ -159,6 +161,7 @@ depends-member:
 - ["9pro2_wifi5AudioC", "audioEngine"]
 - ["9pro2_wifi5AudioC", "audioFile"]
 - ["9pro2_wifi5AudioC", "audioFilePlayer"]
+- ["9pro2_wifi5AudioC", "audioFilter"]
 - ["9pro2_wifi5AudioC", "audioReverb"]
 - ["9pro2_wifi5AudioC", "audioSpeed"]
 - ["9pro2_wifi5AudioC", "audioUnitEQ"]
@@ -168,7 +171,9 @@ depends-member:
 - ["9pro2_wifi5AudioC", "mediaPicker"]
 - ["9pro2_wifi5AudioC", "mediaPickerDidCancel"]
 - ["9pro2_wifi5AudioC", "music"]
-- ["9pro2_wifi5AudioC", "musicChanged"]
+- ["9pro2_wifi5AudioC", "musicBack"]
+- ["9pro2_wifi5AudioC", "musicNext"]
+- ["9pro2_wifi5AudioC", "musicSelect"]
 - ["9pro2_wifi5AudioC", "musician"]
 - ["9pro2_wifi5AudioC", "number"]
 - !private ["9pro2_wifi5AudioC", "print"]
@@ -178,7 +183,7 @@ depends-member:
 - ["9pro2_wifi5AudioC", "sliderEq01"]
 - ["9pro2_wifi5AudioC", "sliderEq02"]
 - ["9pro2_wifi5AudioC", "sliderFeedbackChanged"]
-- ["9pro2_wifi5AudioC", "sliderGain"]
+- ["9pro2_wifi5AudioC", "sliderFilter"]
 - ["9pro2_wifi5AudioC", "sliderLowPassCutOff"]
 - ["9pro2_wifi5AudioC", "sliderPitch"]
 - ["9pro2_wifi5AudioC", "sliderReverbChanged"]
@@ -224,6 +229,7 @@ depends-member:
 - !private ["s7CVarArgP", "audioEngine"]
 - !private ["s7CVarArgP", "audioFile"]
 - !private ["s7CVarArgP", "audioFilePlayer"]
+- !private ["s7CVarArgP", "audioFilter"]
 - !private ["s7CVarArgP", "audioReverb"]
 - !private ["s7CVarArgP", "audioSpeed"]
 - !private ["s7CVarArgP", "audioUnitEQ"]
@@ -301,6 +307,7 @@ depends-member:
 - !private ["s28CustomDebugStringConvertibleP", "audioEngine"]
 - !private ["s28CustomDebugStringConvertibleP", "audioFile"]
 - !private ["s28CustomDebugStringConvertibleP", "audioFilePlayer"]
+- !private ["s28CustomDebugStringConvertibleP", "audioFilter"]
 - !private ["s28CustomDebugStringConvertibleP", "audioReverb"]
 - !private ["s28CustomDebugStringConvertibleP", "audioSpeed"]
 - !private ["s28CustomDebugStringConvertibleP", "audioUnitEQ"]
@@ -381,6 +388,7 @@ depends-member:
 - !private ["s23CustomStringConvertibleP", "audioEngine"]
 - !private ["s23CustomStringConvertibleP", "audioFile"]
 - !private ["s23CustomStringConvertibleP", "audioFilePlayer"]
+- !private ["s23CustomStringConvertibleP", "audioFilter"]
 - !private ["s23CustomStringConvertibleP", "audioReverb"]
 - !private ["s23CustomStringConvertibleP", "audioSpeed"]
 - !private ["s23CustomStringConvertibleP", "audioUnitEQ"]
@@ -454,6 +462,7 @@ depends-member:
 - !private ["s9EquatableP", "audioEngine"]
 - !private ["s9EquatableP", "audioFile"]
 - !private ["s9EquatableP", "audioFilePlayer"]
+- !private ["s9EquatableP", "audioFilter"]
 - !private ["s9EquatableP", "audioReverb"]
 - !private ["s9EquatableP", "audioSpeed"]
 - !private ["s9EquatableP", "audioUnitEQ"]
@@ -509,8 +518,11 @@ depends-member:
 - !private ["s25ExpressibleByArrayLiteralP", "subscript"]
 - !private ["s25ExpressibleByArrayLiteralP", "title"]
 - !private ["s27ExpressibleByBooleanLiteralP", "_getBuiltinLogicValue"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
 - !private ["s25ExpressibleByFloatLiteralP", "init"]
 - !private ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
 - !private ["s13FloatingPointP", "init"]
 - !private ["s8HashableP", "AVAudioEngine"]
 - ["s8HashableP", "AVAudioFile"]
@@ -533,6 +545,7 @@ depends-member:
 - !private ["s8HashableP", "audioEngine"]
 - !private ["s8HashableP", "audioFile"]
 - !private ["s8HashableP", "audioFilePlayer"]
+- !private ["s8HashableP", "audioFilter"]
 - !private ["s8HashableP", "audioReverb"]
 - !private ["s8HashableP", "audioSpeed"]
 - !private ["s8HashableP", "audioUnitEQ"]
@@ -571,6 +584,7 @@ depends-member:
 - !private ["s8HashableP", "volume"]
 - !private ["s8HashableP", "wetDryMix"]
 - ["s8HashableP", ""]
+- !private ["9pro2_wifi17JSONSubscriptTypeP", "init"]
 - !private ["s25LosslessStringConvertibleP", "_getBuiltinLogicValue"]
 - !private ["s25LosslessStringConvertibleP", "init"]
 - !private ["So13MPMediaEntityC", "albumTitle"]
@@ -601,6 +615,7 @@ depends-member:
 - !private ["So31MPMediaPickerControllerDelegateP", "audioEngine"]
 - !private ["So31MPMediaPickerControllerDelegateP", "audioFile"]
 - !private ["So31MPMediaPickerControllerDelegateP", "audioFilePlayer"]
+- !private ["So31MPMediaPickerControllerDelegateP", "audioFilter"]
 - !private ["So31MPMediaPickerControllerDelegateP", "audioReverb"]
 - !private ["So31MPMediaPickerControllerDelegateP", "audioSpeed"]
 - !private ["So31MPMediaPickerControllerDelegateP", "audioUnitEQ"]
@@ -611,6 +626,7 @@ depends-member:
 - !private ["So31MPMediaPickerControllerDelegateP", "number"]
 - !private ["So31MPMediaPickerControllerDelegateP", "print"]
 - ["So31MPMediaPickerControllerDelegateP", ""]
+- !private ["s10MirrorPathP", "init"]
 - !private ["s17MutableCollectionP", "albumTitle"]
 - !private ["s17MutableCollectionP", "append"]
 - !private ["s17MutableCollectionP", "artist"]
@@ -631,8 +647,13 @@ depends-member:
 - !private ["So8NSCodingP", "artist"]
 - !private ["So8NSCodingP", "artwork"]
 - !private ["So8NSCodingP", "assetURL"]
+- !private ["So8NSCodingP", "init"]
 - !private ["So8NSCodingP", "items"]
 - !private ["So8NSCodingP", "title"]
+- !private ["So9NSCopyingP", "init"]
+- !private ["So21NSItemProviderReadingP", "init"]
+- !private ["So21NSItemProviderWritingP", "init"]
+- !private ["So16NSMutableCopyingP", "init"]
 - ["So8NSObjectC", "AVAudioEngine"]
 - ["So8NSObjectC", "AVAudioFile"]
 - ["So8NSObjectC", "AVAudioPlayerNode"]
@@ -659,6 +680,7 @@ depends-member:
 - ["So8NSObjectC", "audioEngine"]
 - ["So8NSObjectC", "audioFile"]
 - ["So8NSObjectC", "audioFilePlayer"]
+- ["So8NSObjectC", "audioFilter"]
 - ["So8NSObjectC", "audioReverb"]
 - ["So8NSObjectC", "audioSpeed"]
 - ["So8NSObjectC", "audioUnitEQ"]
@@ -681,7 +703,9 @@ depends-member:
 - ["So8NSObjectC", "mediaPicker"]
 - ["So8NSObjectC", "mediaPickerDidCancel"]
 - ["So8NSObjectC", "music"]
-- ["So8NSObjectC", "musicChanged"]
+- ["So8NSObjectC", "musicBack"]
+- ["So8NSObjectC", "musicNext"]
+- ["So8NSObjectC", "musicSelect"]
 - ["So8NSObjectC", "musician"]
 - ["So8NSObjectC", "number"]
 - !private ["So8NSObjectC", "pause"]
@@ -697,7 +721,7 @@ depends-member:
 - ["So8NSObjectC", "sliderEq01"]
 - ["So8NSObjectC", "sliderEq02"]
 - ["So8NSObjectC", "sliderFeedbackChanged"]
-- ["So8NSObjectC", "sliderGain"]
+- ["So8NSObjectC", "sliderFilter"]
 - ["So8NSObjectC", "sliderLowPassCutOff"]
 - ["So8NSObjectC", "sliderPitch"]
 - ["So8NSObjectC", "sliderReverbChanged"]
@@ -730,6 +754,7 @@ depends-member:
 - !private ["So16NSObjectProtocolP", "audioEngine"]
 - !private ["So16NSObjectProtocolP", "audioFile"]
 - !private ["So16NSObjectProtocolP", "audioFilePlayer"]
+- !private ["So16NSObjectProtocolP", "audioFilter"]
 - !private ["So16NSObjectProtocolP", "audioReverb"]
 - !private ["So16NSObjectProtocolP", "audioSpeed"]
 - !private ["So16NSObjectProtocolP", "audioUnitEQ"]
@@ -770,8 +795,10 @@ depends-member:
 - !private ["So14NSSecureCodingP", "artist"]
 - !private ["So14NSSecureCodingP", "artwork"]
 - !private ["So14NSSecureCodingP", "assetURL"]
+- !private ["So14NSSecureCodingP", "init"]
 - !private ["So14NSSecureCodingP", "items"]
 - !private ["So14NSSecureCodingP", "title"]
+- !private ["So8NSStringC", "init"]
 - !private ["s7NumericP", "init"]
 - !private ["s22RandomAccessCollectionP", "albumTitle"]
 - !private ["s22RandomAccessCollectionP", "append"]
@@ -825,6 +852,10 @@ depends-member:
 - !private ["s8SequenceP", "title"]
 - !private ["s13SignedNumericP", "init"]
 - !private ["s10StrideableP", "init"]
+- !private ["SS", "init"]
+- !private ["s14StringProtocolP", "init"]
+- !private ["s16TextOutputStreamP", "init"]
+- !private ["s20TextOutputStreamableP", "init"]
 - !private ["s14_ArrayProtocolP", "albumTitle"]
 - !private ["s14_ArrayProtocolP", "append"]
 - !private ["s14_ArrayProtocolP", "artist"]
@@ -876,8 +907,14 @@ depends-member:
 - !private ["s24_DestructorSafeContainerP", "subscript"]
 - !private ["s24_DestructorSafeContainerP", "title"]
 - !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "_getBuiltinLogicValue"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
 - !private ["s33_ExpressibleByBuiltinFloatLiteralP", "init"]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
 - !private ["s10_IndexableP", "albumTitle"]
 - !private ["s10_IndexableP", "append"]
 - !private ["s10_IndexableP", "artist"]
@@ -930,6 +967,7 @@ depends-member:
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "audioEngine"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "audioFile"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "audioFilePlayer"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "audioFilter"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "audioReverb"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "audioSpeed"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "audioUnitEQ"]
@@ -1021,6 +1059,7 @@ depends-member:
 - !private ["s26_RangeReplaceableIndexableP", "subscript"]
 - !private ["s26_RangeReplaceableIndexableP", "title"]
 - !private ["s11_StrideableP", "init"]
+- !private ["s16_SwiftStringViewP", "init"]
 depends-nominal:
 - !private "So15AVAudio3DMixingP"
 - !private "So13AVAudioEngineC"
@@ -1058,20 +1097,30 @@ depends-nominal:
 - "s9EquatableP"
 - "s25ExpressibleByArrayLiteralP"
 - !private "s27ExpressibleByBooleanLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
 - !private "s25ExpressibleByFloatLiteralP"
 - !private "s27ExpressibleByIntegerLiteralP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
 - !private "s13FloatingPointP"
 - "s8HashableP"
+- !private "9pro2_wifi17JSONSubscriptTypeP"
 - !private "s25LosslessStringConvertibleP"
 - !private "So13MPMediaEntityC"
 - !private "So11MPMediaItemC"
 - !private "So21MPMediaItemCollectionC"
 - "So31MPMediaPickerControllerDelegateP"
+- !private "s10MirrorPathP"
 - "s17MutableCollectionP"
 - !private "So8NSCodingP"
+- !private "So9NSCopyingP"
+- !private "So21NSItemProviderReadingP"
+- !private "So21NSItemProviderWritingP"
+- !private "So16NSMutableCopyingP"
 - "So8NSObjectC"
 - "So16NSObjectProtocolP"
 - !private "So14NSSecureCodingP"
+- !private "So8NSStringC"
 - !private "s7NumericP"
 - "s22RandomAccessCollectionP"
 - "s26RangeReplaceableCollectionP"
@@ -1079,14 +1128,24 @@ depends-nominal:
 - "s8SequenceP"
 - !private "s13SignedNumericP"
 - !private "s10StrideableP"
+- !private "SS"
+- !private "s14StringProtocolP"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
 - "s14_ArrayProtocolP"
 - "s23_BidirectionalIndexableP"
 - !private "s15_CVarArgAlignedP"
 - !private "s22_CVarArgPassedAsDoubleP"
 - "s24_DestructorSafeContainerP"
 - !private "s35_ExpressibleByBuiltinBooleanLiteralP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
 - !private "s33_ExpressibleByBuiltinFloatLiteralP"
 - !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s39_ExpressibleByBuiltinUTF16StringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s33_ExpressibleByStringInterpolationP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
 - "s10_IndexableP"
 - "s14_IndexableBaseP"
 - "10Foundation27_KeyValueCodingAndObservingP"
@@ -1095,6 +1154,7 @@ depends-nominal:
 - "s22_RandomAccessIndexableP"
 - "s26_RangeReplaceableIndexableP"
 - !private "s11_StrideableP"
+- !private "s16_SwiftStringViewP"
 depends-dynamic-lookup:
 depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.apinotesc"
@@ -1116,4 +1176,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SwiftOnoneSupport.swiftmodule"
-interface-hash: "cda03539fd56f3af916536d66988e700"
+interface-hash: "5cfd549ee434f65249a86794480428ce"

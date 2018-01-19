@@ -5,7 +5,7 @@
 	<key>BuildAliasOf</key>
 	<string>XCTest</string>
 	<key>BuildVersion</key>
-	<string>2</string>
+	<string>1</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -13,6 +13,6 @@
 	<key>ProjectName</key>
 	<string>XCTest_iOS</string>
 	<key>SourceVersion</key>
-	<string>13516000000000000</string>
+	<string>13764000000000000</string>
 </dict>
 </plist>

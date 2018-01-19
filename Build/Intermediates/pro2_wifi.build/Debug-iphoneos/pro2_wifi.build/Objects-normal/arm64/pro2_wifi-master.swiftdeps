@@ -1,8 +1,9 @@
 version: "Apple Swift version 4.0.3 (swiftlang-900.0.74.1 clang-900.0.39.2)"
-options: "9cc05d5257c1fef1658e4179f793432d"
-build_time: [1515656177, 678773000]
+options: "b44355e223b33a8dc703e74ee51eae8e"
+build_time: [1516366725, 155358000]
 inputs:
-  "/Users/fuji1153/Desktop/ios application/pro2_wifi/pro2_wifi/Audio.swift": [1515503630, 0]
-  "/Users/fuji1153/Desktop/ios application/pro2_wifi/pro2_wifi/ViewController.swift": [1515571475, 0]
-  "/Users/fuji1153/Desktop/ios application/pro2_wifi/pro2_wifi/SwiftyJSON.swift": [1514985972, 0]
-  "/Users/fuji1153/Desktop/ios application/pro2_wifi/pro2_wifi/AppDelegate.swift": [1514985972, 0]
+  "/Users/fuji1153/Desktop/iOS/pro2_wifi/pro2_wifi/ScondView.swift": [1516366725, 0]
+  "/Users/fuji1153/Desktop/iOS/pro2_wifi/pro2_wifi/Audio.swift": [1516354738, 0]
+  "/Users/fuji1153/Desktop/iOS/pro2_wifi/pro2_wifi/ViewController.swift": [1516364057, 0]
+  "/Users/fuji1153/Desktop/iOS/pro2_wifi/pro2_wifi/SwiftyJSON.swift": [1514985972, 0]
+  "/Users/fuji1153/Desktop/iOS/pro2_wifi/pro2_wifi/AppDelegate.swift": [1516349360, 0]

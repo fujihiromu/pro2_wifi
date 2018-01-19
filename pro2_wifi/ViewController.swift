@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 import MediaPlayer
 
-class ViewController: UIViewController , MPMediaPickerControllerDelegate,
+open class ViewController: UIViewController , MPMediaPickerControllerDelegate,
 UITableViewDataSource, UITableViewDelegate{
 
     @IBOutlet weak var playImage: UIImageView!
@@ -12,7 +12,9 @@ UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var Wifi_Switch: UISwitch!
     @IBOutlet var musictable:UITableView!
     
-    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var ProgressView: UIProgressView!
+    
+//    @IBOutlet weak var playButton: UIButton!
 
     private let ESP8266ServerURL = "http://192.168.0.1"
     
@@ -21,26 +23,17 @@ UITableViewDataSource, UITableViewDelegate{
     let MIN_GAIN: Float = -96.0
     
     private var isScanning = false
-    private var audio = Audio()
+     var audio = Audio()
     var isplay = false
     var timer = Timer()
     var audioFile: AVAudioFile!
     
-//    // section毎の画像配列
-//    let imgArray: NSArray = [
-//        "img0"]
-//
-//    let label2Array: NSArray = [
-//        "2013/8/23/16:04"]
-    
-    override func viewDidLoad() {
+
+    override open func viewDidLoad() {
  
-        
         super.viewDidLoad()
     
     }
-    
-    
 
     
     func timerUpdate() {
@@ -67,43 +60,91 @@ UITableViewDataSource, UITableViewDelegate{
     }
     
     func timerBegin(){
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) {_ in
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) {_ in
 //            print("Hello")
             if(self.Wifi_Switch.isOn){
                 if let url = NSURL(string: self.ESP8266ServerURL){
-                    let task = try! URLSession.shared.dataTask(with: url as URL, completionHandler: {data, response, error in
+                    let task = URLSession.shared.dataTask(with: url as URL, completionHandler: {data, response, error in
                         if( data != nil){
                             let json = try! JSON(data: data!)
-                            
-                            if let BPM = json["BPM"].int {
-                                self.audio.sliderSpeed(value: Float(BPM))
+                        
+                            if let FILTER = json["FILTER"].int {
+                                let in_GAIN = FILTER * 24 / 950
+                                self.audio.sliderFilter(value: Float(in_GAIN))
                             }
-                            if let GAIN = json["GAIN"].int {
-                                self.audio.sliderGain(value: Float(GAIN), num: 2)
-                            }
-                            if let DELAY = json["DELAY"].int {
-                                self.audio.sliderDelayTimeChanged(value: Float(DELAY))
+                            if let DELAY = json["DELAY"].float {
+                                let in_DELAY = DELAY * 50.0 / 950
+                                self.audio.sliderDelayTimeChanged(value: Float(in_DELAY))
                             }
                             if let REVERB = json["REVERB"].int {
-                                self.audio.sliderReverbChanged(value: Float(REVERB))
+                                let in_REVERB = REVERB * 100 / 950
+                                self.audio.sliderReverbChanged(value: Float(in_REVERB))
+                            }
+                            if let BPM = json["BPM"].int {
+                                var in_BPM = BPM - 548
+                                if(in_BPM < 0){
+                                    in_BPM  = in_BPM * 1 / 548 + 1
+                                }else{
+                                    in_BPM  = in_BPM * 1 / 400 + 1
+                                }
+                               
+                                self.audio.sliderSpeed(value: Float(in_BPM))
                             }
                             if let PITCH = json["PITCH"].int {
-                                self.audio.sliderPitch(value: Float(PITCH))
+//                                let in_PITCH = PITCH * 2400 / 1064 - 1200
+                                var in_PITCH = PITCH - 548
+                                if(in_PITCH < 0){
+                                    in_PITCH  = in_PITCH * 950 / 548
+                                }else{
+                                    in_PITCH  = in_PITCH * 950 / 400
+                                }
+                                
+                                self.audio.sliderPitch(value: Float(in_PITCH))
                             }
-                            if let VOLUME = json["VOLUME"].int {
-                                self.audio.sliderVolumeChange(value: Float(VOLUME))
+                            if let VOLUME = json["VOLUME"].float {
+                                let in_VOLUME = VOLUME * 1.0 / 950
+                                self.audio.sliderVolumeChange(value: Float(in_VOLUME))
+                                print(in_VOLUME)
                             }
 //                            if let WAW = json["WAW"].int {
 //                                self.audio.sliderWaw(value: Float(WAW))
 //                            }
                             if let EQ0 = json["EQ0"].int {
-                                self.audio.sliderEq00(value: Float(EQ0))
+                                var in_EQ0 = EQ0 - 548
+                                if(in_EQ0 < 0){
+                                    in_EQ0  = in_EQ0 * 24 / 548
+                                }else{
+                                    in_EQ0  = in_EQ0 * 24 / 400
+                                }
+                    
+                                self.audio.sliderEq00(value: Float(in_EQ0))
                             }
                             if let EQ1 = json["EQ1"].int {
-                                self.audio.sliderEq01(value: Float(EQ1))
+                                var in_EQ1 = EQ1 - 300
+                                if(in_EQ1 < 0){
+                                    in_EQ1 = in_EQ1 * 24 / 300
+                                }else{
+                                    in_EQ1  = in_EQ1 * 24 / 650
+                                }
+                                self.audio.sliderEq01(value: Float(in_EQ1))
                             }
                             if let EQ2 = json["EQ2"].int {
-                                self.audio.sliderEq02(value: Float(EQ2))
+                                var in_EQ2 = EQ2 - 300
+                                if(in_EQ2 < 0){
+                                    in_EQ2  = in_EQ2 * 24 / 300
+                                }else{
+                                    in_EQ2  = in_EQ2 * 24 / 900
+                                }
+                                self.audio.sliderEq02(value: Float(in_EQ2))
+                            }
+                            if let BUTTON = json["BUTTON"].int {
+                                if(BUTTON == 1){
+                                    self.musicPlayPause()
+                                }else if(BUTTON == 2){
+                                    self.musicNext()
+                                }else if(BUTTON == 3){
+                                    self.musicBack()
+                                }
                             }
                         }else{
                             print("nodata")
@@ -116,7 +157,7 @@ UITableViewDataSource, UITableViewDelegate{
         }
     }
     
-    override func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
@@ -126,7 +167,38 @@ UITableViewDataSource, UITableViewDelegate{
 //        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
 //        albumName.text = audio.album[audio.number]
     }
-    
+    func musicPlayPause() {
+        
+        if (!isplay){
+            audio.buttonPlayPressed(isPlay: false)
+//            playButton.setTitle("PAUSE", for: .normal)
+            isplay = true
+        } else {
+            audio.buttonPlayPressed(isPlay: true)
+//            playButton.setTitle("PLAY", for: .normal)
+            isplay = false
+        }
+        
+        
+    }
+   func musicNext() {
+        audio.musicNext(isPlay: isplay)
+        if(audio.audioFile.count > 0){
+            playAlbum.text = audio.album[audio.number]
+            playImage.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
+            playArtist.text = audio.musician[audio.number]
+            playMusic.text = audio.music[audio.number]
+        }
+    }
+    func musicBack() {
+        audio.musicBack(isPlay: isplay)
+        if(audio.audioFile.count > 0){
+            playAlbum.text = audio.album[audio.number]
+            playImage.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
+            playArtist.text = audio.musician[audio.number]
+            playMusic.text = audio.music[audio.number]
+        }
+    }
  
     
     @IBAction func scanBtnTapp(sender: UISwitch) {
@@ -141,17 +213,18 @@ UITableViewDataSource, UITableViewDelegate{
         
         if (!isplay){
             audio.buttonPlayPressed(isPlay: false)
-            playButton.setTitle("PAUSE", for: .normal)
+//            playButton.setTitle("PAUSE", for: .normal)
             isplay = true
         } else {
             audio.buttonPlayPressed(isPlay: true)
-            playButton.setTitle("PLAY", for: .normal)
+//            playButton.setTitle("PLAY", for: .normal)
             isplay = false
         }
-        print(audio.audioFile.count)
+      
+
     }
     @IBAction func musicchange(sender: UIButton) {
-        audio.musicChanged(isPlay: isplay)
+        audio.musicNext(isPlay: isplay)
         if(audio.audioFile.count > 0){
             playAlbum.text = audio.album[audio.number]
             playImage.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
@@ -172,7 +245,7 @@ UITableViewDataSource, UITableViewDelegate{
     
     }
     // メディアアイテムピッカーでアイテムを選択完了したときに呼び出される
-    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+    public func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         
         // このfunctionを抜ける際にピッカーを閉じ、破棄する
         // (defer文はfunctionを抜ける際に実行される)
@@ -191,39 +264,40 @@ UITableViewDataSource, UITableViewDelegate{
         }
         
         audio.setPlaylist(mediaItem: mediaItemCollection)
-//        // 先頭のMPMediaItemを取得し、そのassetURLからプレイヤーを作成する
-//        albumName.text = audio.album[audio.number]
-//        tittle.text = audio.music[audio.number]
-//        musician.text = audio.musician[audio.number]
-//        img.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
-        
-        
-        
-//        playAlbum.text = audio.album[audio.number]
-//        playImage.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
-//        playArtist.text = audio.musician[audio.number]
-//        playMusic.text = audio.music[audio.number]
+
+        print("this")
+        print(mediaItemCollection.items.count)
+
+        playAlbum.text = audio.album[audio.number]
+        playImage.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
+        playArtist.text = audio.musician[audio.number]
+        playMusic.text = audio.music[audio.number]
 //
         musictable.reloadData()
+        
+        ProgressView.alpha = 1.0
+        // 1.0
+        setProgress(progress: 0.1, animated: true)
     }
     
     //選択がキャンセルされた場合に呼ばれる
-    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
+    public func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         // ピッカーを閉じ、破棄する
         dismiss(animated: true, completion: nil)
         musictable.reloadData()
     }
 //
     //Table Viewのセルの数を指定
-    func tableView(_ table: UITableView,
+    public func tableView(_ table: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         return audio.audioFile.count
     }
 
     //各セルの要素を設定する
-    func tableView(_ table: UITableView,
+    public func tableView(_ table: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
+        
         // tableCell の ID で UITableViewCell のインスタンスを生成
         let cell = musictable.dequeueReusableCell(withIdentifier: "musicCell",
                                              for: indexPath)
@@ -243,12 +317,43 @@ UITableViewDataSource, UITableViewDelegate{
         let label2 = cell.viewWithTag(3) as! UILabel
         label2.text = audio.musician[indexPath.row]
 
+
         return cell
     }
     // Cell の高さを１２０にする
-    func tableView(_ table: UITableView,heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+    public func tableView(_ table: UITableView,heightForRowAt indexPath: IndexPath) -> CGFloat {
+        musictable.alpha = 1.0;
+        if(audio.audioFile.count == 0){
+            return 300.0
+        }else{
+            return 80.0
+        }
     }
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        
+        audio.musicSelect(isPlay: isplay,num: indexPath.row )
+        if(audio.audioFile.count > 0){
+            playAlbum.text = audio.album[audio.number]
+            playImage.image = audio.artwork[audio.number].image(at: audio.artwork[audio.number].bounds.size)
+            playArtist.text = audio.musician[audio.number]
+            playMusic.text = audio.music[audio.number]
+        }
+    }
+
+    
+    private func setProgress(progress: Float, animated: Bool) {
+        CATransaction.setCompletionBlock {
+            NSLog("finish animation")
+        }
+        ProgressView.setProgress(progress, animated: true)
+        NSLog("begin animation")
+    }
+
+    // セグエ遷移用に追加 ↓↓↓
+    @IBAction func goNextBySegue(_ sender:UIButton) {
+       self.performSegue(withIdentifier: "toPlayList", sender: nil)
+    }
+    
 
 }
 
