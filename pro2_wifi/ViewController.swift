@@ -8,13 +8,14 @@ UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var playImage: UIImageView!
     @IBOutlet weak var playMusic: UILabel!
     @IBOutlet weak var playArtist: UILabel!
+    @IBOutlet weak var grond: UILabel!
     @IBOutlet weak var playAlbum: UILabel!
     @IBOutlet weak var Wifi_Switch: UISwitch!
     @IBOutlet var musictable:UITableView!
+    @IBOutlet weak var bar: UIImageView!
+    @IBOutlet weak var wifiswitch: UIImageView!
     
-    @IBOutlet weak var ProgressView: UIProgressView!
-    
-//    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
 
     private let ESP8266ServerURL = "http://192.168.0.1"
     
@@ -69,42 +70,44 @@ UITableViewDataSource, UITableViewDelegate{
                             let json = try! JSON(data: data!)
                         
                             if let FILTER = json["FILTER"].int {
-                                let in_GAIN = FILTER * 24 / 950
+                                let in_GAIN = (FILTER * 24 / 950)*3
                                 self.audio.sliderFilter(value: Float(in_GAIN))
                             }
                             if let DELAY = json["DELAY"].float {
-                                let in_DELAY = DELAY * 50.0 / 950
+                                let in_DELAY = ((DELAY - 180) * 50.0 / 950)*3
                                 self.audio.sliderDelayTimeChanged(value: Float(in_DELAY))
                             }
-                            if let REVERB = json["REVERB"].int {
-                                let in_REVERB = REVERB * 100 / 950
+                            if let REVERB = json["REVERB"].float {
+                                let in_REVERB = ((REVERB - 180) * 100 / 950)*3
                                 self.audio.sliderReverbChanged(value: Float(in_REVERB))
                             }
-                            if let BPM = json["BPM"].int {
-                                var in_BPM = BPM - 548
+                            if let BPM = json["FILTER"].float {
+                                var in_BPM = BPM - 300.0
                                 if(in_BPM < 0){
-                                    in_BPM  = in_BPM * 1 / 548 + 1
+                                    in_BPM  = in_BPM * 1 / 300 + 1
+                                    print(in_BPM)
                                 }else{
-                                    in_BPM  = in_BPM * 1 / 400 + 1
+                                    in_BPM  = in_BPM * 1 / 550 + 1
+                                    print(in_BPM)
                                 }
                                
                                 self.audio.sliderSpeed(value: Float(in_BPM))
                             }
                             if let PITCH = json["PITCH"].int {
 //                                let in_PITCH = PITCH * 2400 / 1064 - 1200
-                                var in_PITCH = PITCH - 548
+                                var in_PITCH = PITCH - 300
                                 if(in_PITCH < 0){
-                                    in_PITCH  = in_PITCH * 950 / 548
+                                    in_PITCH  = in_PITCH * 950 / 300
                                 }else{
-                                    in_PITCH  = in_PITCH * 950 / 400
+                                    in_PITCH  = in_PITCH * 950 / 600
                                 }
                                 
                                 self.audio.sliderPitch(value: Float(in_PITCH))
                             }
                             if let VOLUME = json["VOLUME"].float {
-                                let in_VOLUME = VOLUME * 1.0 / 950
-                                self.audio.sliderVolumeChange(value: Float(in_VOLUME))
-                                print(in_VOLUME)
+                                var in_VOLUME = VOLUME * 1.0 / 950 - 180
+                                in_VOLUME = 1.0; self.audio.sliderVolumeChange(value: Float(in_VOLUME))
+                                
                             }
 //                            if let WAW = json["WAW"].int {
 //                                self.audio.sliderWaw(value: Float(WAW))
@@ -117,7 +120,7 @@ UITableViewDataSource, UITableViewDelegate{
                                     in_EQ0  = in_EQ0 * 24 / 400
                                 }
                     
-                                self.audio.sliderEq00(value: Float(in_EQ0))
+//                                self.audio.sliderEq00(value: Float(in_EQ0))
                             }
                             if let EQ1 = json["EQ1"].int {
                                 var in_EQ1 = EQ1 - 300
@@ -126,7 +129,7 @@ UITableViewDataSource, UITableViewDelegate{
                                 }else{
                                     in_EQ1  = in_EQ1 * 24 / 650
                                 }
-                                self.audio.sliderEq01(value: Float(in_EQ1))
+//                                self.audio.sliderEq01(value: Float(in_EQ1))
                             }
                             if let EQ2 = json["EQ2"].int {
                                 var in_EQ2 = EQ2 - 300
@@ -135,7 +138,7 @@ UITableViewDataSource, UITableViewDelegate{
                                 }else{
                                     in_EQ2  = in_EQ2 * 24 / 900
                                 }
-                                self.audio.sliderEq02(value: Float(in_EQ2))
+//                                self.audio.sliderEq02(value: Float(in_EQ2))
                             }
                             if let BUTTON = json["BUTTON"].int {
                                 if(BUTTON == 1){
@@ -204,8 +207,9 @@ UITableViewDataSource, UITableViewDelegate{
     @IBAction func scanBtnTapp(sender: UISwitch) {
         if sender.isOn{
             timerBegin()
+            wifiswitch.image = UIImage(named: "OFF.png")
         } else {
-            
+             wifiswitch.image = UIImage(named: "ON.png")
        
         }
     }
@@ -274,10 +278,13 @@ UITableViewDataSource, UITableViewDelegate{
         playMusic.text = audio.music[audio.number]
 //
         musictable.reloadData()
-        
-        ProgressView.alpha = 1.0
-        // 1.0
-        setProgress(progress: 0.1, animated: true)
+   
+//        ProgressView.alpha = 1.0
+//         1.0
+//        setProgress(progress: 0.1, animated: true)
+       
+        grond.alpha = 0.2
+        bar.alpha = 1.0
     }
     
     //選択がキャンセルされた場合に呼ばれる
@@ -323,11 +330,9 @@ UITableViewDataSource, UITableViewDelegate{
     // Cell の高さを１２０にする
     public func tableView(_ table: UITableView,heightForRowAt indexPath: IndexPath) -> CGFloat {
         musictable.alpha = 1.0;
-        if(audio.audioFile.count == 0){
-            return 300.0
-        }else{
+    
             return 80.0
-        }
+        
     }
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
@@ -341,19 +346,19 @@ UITableViewDataSource, UITableViewDelegate{
     }
 
     
-    private func setProgress(progress: Float, animated: Bool) {
-        CATransaction.setCompletionBlock {
-            NSLog("finish animation")
-        }
-        ProgressView.setProgress(progress, animated: true)
-        NSLog("begin animation")
-    }
+//    private func setProgress(progress: Float, animated: Bool) {
+//        CATransaction.setCompletionBlock {
+//            NSLog("finish animation")
+//        }
+//        ProgressView.setProgress(progress, animated: true)
+//        NSLog("begin animation")
+//    }
 
-    // セグエ遷移用に追加 ↓↓↓
-    @IBAction func goNextBySegue(_ sender:UIButton) {
-       self.performSegue(withIdentifier: "toPlayList", sender: nil)
-    }
-    
+//    // セグエ遷移用に追加 ↓↓↓
+//    @IBAction func goNextBySegue(_ sender:UIButton) {
+//       self.performSegue(withIdentifier: "toPlayList", sender: nil)
+//    }
+//
 
 }
 

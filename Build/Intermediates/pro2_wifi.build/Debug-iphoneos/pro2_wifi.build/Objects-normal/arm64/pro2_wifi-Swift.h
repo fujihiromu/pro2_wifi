@@ -215,7 +215,6 @@ SWIFT_CLASS("_TtC9pro2_wifi5Audio")
 @class UILabel;
 @class UISwitch;
 @class UITableView;
-@class UIProgressView;
 @class UIButton;
 @class MPMediaPickerController;
 @class MPMediaItemCollection;
@@ -228,10 +227,13 @@ SWIFT_CLASS("_TtC9pro2_wifi14ViewController")
 @property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified playImage;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified playMusic;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified playArtist;
+@property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified grond;
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified playAlbum;
 @property (nonatomic, weak) IBOutlet UISwitch * _Null_unspecified Wifi_Switch;
 @property (nonatomic, strong) IBOutlet UITableView * _Null_unspecified musictable;
-@property (nonatomic, weak) IBOutlet UIProgressView * _Null_unspecified ProgressView;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified bar;
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified wifiswitch;
+@property (nonatomic, weak) IBOutlet UIButton * _Null_unspecified playButton;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
 - (IBAction)scanBtnTappWithSender:(UISwitch * _Nonnull)sender;
@@ -240,22 +242,6 @@ SWIFT_CLASS("_TtC9pro2_wifi14ViewController")
 - (IBAction)choicePickWithSender:(id _Nonnull)sender;
 - (void)mediaPicker:(MPMediaPickerController * _Nonnull)mediaPicker didPickMediaItems:(MPMediaItemCollection * _Nonnull)mediaItemCollection;
 - (void)mediaPickerDidCancel:(MPMediaPickerController * _Nonnull)mediaPicker;
-- (NSInteger)tableView:(UITableView * _Nonnull)table numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)table cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (CGFloat)tableView:(UITableView * _Nonnull)table heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
-- (IBAction)goNextBySegue:(UIButton * _Nonnull)sender;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC9pro2_wifi21secoundViewController")
-@interface secoundViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, strong) IBOutlet UITableView * _Null_unspecified playlisttable;
-@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified playImage;
-- (void)viewDidLoad;
-- (IBAction)toback:(id _Nonnull)sender;
 - (NSInteger)tableView:(UITableView * _Nonnull)table numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)table cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (CGFloat)tableView:(UITableView * _Nonnull)table heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
